@@ -5,6 +5,8 @@ import requests
 import json
 import datetime as dt
 
+from flight_data import FlightData
+
 
 class FlightSearch:
     # This class is responsible for talking to the Flight Search API.
@@ -15,6 +17,8 @@ class FlightSearch:
             "https://tequila-api.kiwi.com/locations/query"
         )
         self.__TEQUILA_HEADERS = {"apikey": self.__TEQUILA_API_KEY}
+        self.flight_data = FlightData()
+        self.__search_result_data = {}
 
     def get_iata_code(self, location):
         params = {"term": location, "location_types": "city"}
@@ -61,5 +65,9 @@ class FlightSearch:
             json.dump(search_request.json(), f)
         with open("search_results.json") as f:
             search_json = json.load(f)
+        search_json = search_json["data"][0]
 
         pass
+
+    def get_search_result(self)->FlightData:
+        self.flight_data = FlightData()

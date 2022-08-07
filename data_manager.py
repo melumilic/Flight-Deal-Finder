@@ -1,6 +1,8 @@
 import os
+from tokenize import String
 from typing import Dict
 import requests
+from flight_search import FlightSearch
 
 
 class DataManager:
@@ -15,8 +17,8 @@ class DataManager:
         }
         pass
 
-    def add_entry(self, city):
-        data = {"price": {"city": city}}
+    def add_entry(self, city:String):
+        data = {"price": {"city": city,"iataCode":FlightSearch().get_iata_code(city)}}
         request = requests.post(
             url=self.__SHEETY_API_ENDPOINT, json=data, headers=self.__SHEETY_HEADER
         )

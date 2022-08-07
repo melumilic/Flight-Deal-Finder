@@ -1,4 +1,5 @@
 import os
+from typing import Dict
 import requests
 
 
@@ -22,6 +23,13 @@ class DataManager:
         print(request.text)
         pass
     
+    def get_sheet(self) -> Dict:
+        request = requests.get(url=self.__SHEETY_API_ENDPOINT,headers=self.__SHEETY_HEADER)
+        print(request.text)
+        sheet_json = request.json()
+        print(sheet_json)
+        return sheet_json
+
     def update_entry(
         self,
     ):
@@ -30,7 +38,5 @@ class DataManager:
     def delete_entry(self):
         pass
 
-    def get_entry(self):
-        pass
 
     # This class is responsible for talking to the Google Sheet.

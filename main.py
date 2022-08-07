@@ -23,7 +23,15 @@ import os
 #     date_to="02/09/2022",
 # )
 
-with open("search_results.json") as f:
-    search_json = json.load(f)
+# with open("search_results.json") as f:
+#     search_json = json.load(f)
 
-print(search_json["data"][0]["price"])
+#print(search_json["data"][0]["price"])
+
+search_result = FlightSearch().get_cheapest_flight(
+    iata_code="LAX",
+    destination_airport="RNO",
+    date_from="08/08/2022",
+    date_to="02/09/2022",
+)
+print(search_result)

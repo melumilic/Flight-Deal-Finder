@@ -46,6 +46,7 @@ class FlightSearch:
             "curr": "USD",
             "nights_in_dst_from":7,
             "nights_in_dst_to":10,
+            "one_for_city":1,
             #"flight_type":"round",
             "max_stopovers":0
         }
@@ -68,7 +69,7 @@ class FlightSearch:
         destination_airport: String,
         date_from: String,
         date_to: String,
-    ):
+    ) -> FlightData:
         # with open("search_results.json") as f:
         #     search_json = json.load(f)
         if self.__search_result_data is None:
@@ -78,17 +79,16 @@ class FlightSearch:
                 date_from=date_from,
                 date_to=date_to,
             )
-        else:
-            #search_result = search_json["data"][0]
-            search_result = self.__search_result_data["data"][0]
-            flight_data = FlightData(
-                price=search_result["price"],
-                origin_city=search_result["cityFrom"],
-                origin_airport=search_result["cityCodeFrom"],
-                destination_city=search_result["cityTo"],
-                destination_airport=search_result["cityCodeTo"],
-                out_date=search_result["route"][0]["local_departure"],
-                return_date=search_result["route"][1]["local_departure"]
-            )
-            return flight_data
+        #search_result = search_json["data"][0]
+        search_result = self.__search_result_data["data"][0]
+        flight_data = FlightData(
+            price=search_result["price"],
+            origin_city=search_result["cityFrom"],
+            origin_airport=search_result["cityCodeFrom"],
+            destination_city=search_result["cityTo"],
+            destination_airport=search_result["cityCodeTo"],
+            out_date=search_result["route"][0]["local_departure"],
+            return_date=search_result["route"][1]["local_departure"]
+        )
+        return flight_data
 

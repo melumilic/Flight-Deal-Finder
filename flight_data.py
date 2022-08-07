@@ -14,7 +14,7 @@ class FlightData:
         destination_airport,
         out_date,
         return_date,
-    ) -> None:
+    ):
         self.price = price
         self.origin_city = origin_city
         self.origin_airport = origin_airport

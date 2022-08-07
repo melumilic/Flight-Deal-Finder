@@ -1,0 +1,6 @@
+{
+  "prices": [
+    { "city": "Reno", "iataCode": "RNO", "id": 2 },
+    { "city": "Taipei", "iataCode": "TPE", "id": 3 }
+  ]
+}

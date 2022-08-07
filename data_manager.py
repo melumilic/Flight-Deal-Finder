@@ -22,16 +22,12 @@ class DataManager:
         request = requests.post(
             url=self.__SHEETY_API_ENDPOINT, json=data, headers=self.__SHEETY_HEADER
         )
-        print(request.text)
-        pass
 
     def get_sheet(self) -> Dict:
         request = requests.get(
             url=self.__SHEETY_API_ENDPOINT, headers=self.__SHEETY_HEADER
         )
-        print(request.text)
         sheet_json = request.json()
-        print(sheet_json)
         return sheet_json
 
     def update_entry_price(self, index: int, price=None):

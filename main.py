@@ -14,14 +14,25 @@ import os
 # print(flight_search_test.get_iata_code("London"))
 
 data_manager = DataManager()
-data_manager.add_entry(city="Taipei")
-flight_list = data_manager.get_sheet()
-with open("flight_list.json","w") as f:
-    json.dump(flight_list)
+# data_manager.add_entry(city="Taipei")
+# flight_sheet = data_manager.get_sheet()
+# with open("flight_list.json","w") as f:
+#     json.dump(flight_sheet, f)
 with open("flight_list.json") as f:
-    flight_list = f
-print(flight_list)
-#data_manager.update_entry(index=2,iata_code=FlightSearch().get_iata_code("TPE"))
+    flight_sheet = json.load(f)
+print(flight_sheet)
+flight_sheet = flight_sheet["prices"]
+index = 2
+for entry in flight_sheet:
+    search_result = FlightSearch().get_cheapest_flight(
+        iata_code="LAX",
+        destination_airport=entry["iataCode"],
+        date_from="01/09/2022",
+        date_to="11/09/2022",
+    )
+    DataManager().update_entry_price(index=index, price=search_result.price)
+    index += 1
+# data_manager.update_entry(index=2,iata_code=FlightSearch().get_iata_code("TPE"))
 # FlightSearch().get_flights(
 #     iata_code="LAX",
 #     destination_airport="RNO",
@@ -32,7 +43,7 @@ print(flight_list)
 # with open("search_results.json") as f:
 #     search_json = json.load(f)
 
-#print(search_json["data"][0]["price"])
+# print(search_json["data"][0]["price"])
 
 # search_result = FlightSearch().get_cheapest_flight(
 #     iata_code="LAX",

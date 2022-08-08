@@ -6,6 +6,8 @@ from flight_search import FlightSearch
 # from notification_manager import NotificationManager
 import os
 
+from notification_manager import NotificationManager
+
 # This file will need to use the DataManager,FlightSearch, FlightData, NotificationManager classes to achieve the program requirements.
 # test = DataManager()
 # test.add_entry("Los Angeles")
@@ -31,7 +33,12 @@ for entry in flight_sheet:
         date_to="11/09/2022",
     )
     DataManager().update_entry_price(index=index, price=search_result.price)
+    if search_result.price < 200:
+        NotificationManager().send_message(
+            message=f"Flight from {search_result.origin_airport} to {search_result.destination_airport} departing {search_result.out_date} only ${search_result.price}"
+        )
     index += 1
+
 # data_manager.update_entry(index=2,iata_code=FlightSearch().get_iata_code("TPE"))
 # FlightSearch().get_flights(
 #     iata_code="LAX",
